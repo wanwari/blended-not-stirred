@@ -18,8 +18,23 @@ const recipe = {
     categories: ["low_fat", "nut free"]
 };
 
+const recipe2 = {
+    name: "Grapefruit ",
+    type: "SMOOTHIE",
+    ingredients: [
+        {name: "grapefruit", amount: "2", amountType: "whole"},
+        {name: "sugar", amount: "3", amountType: "tablespoons"},
+        {name: "ice", amount: "1", amountType: "cup"},
+    ],
+    categories: ["low_fat", "nut free"]
+};
+
 app.get('/get_recipe/tropical', (req, res) => {
     res.send(recipe);
+});
+
+app.get('/get_recipe/grapefruit', (req, res) => {
+    res.send(recipe2);
 });
 
 const server = app.listen(8181, () => {
