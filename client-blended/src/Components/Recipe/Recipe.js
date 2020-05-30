@@ -1,12 +1,16 @@
 import React from 'react';
 
-const Recipe = () => {
+import Ingredient from '../Ingredient/Ingredient';
 
-    
+const Recipe = props => {
+
+    const ingredientArray = [props.data.strIngredient1, props.data.strIngredient2, props.data.strIngredient3];
 
     return(
         <div>
-            <h1>Recipe.js</h1>
+            <h1>{ props.data.strDrink }</h1>
+            <Ingredient ingredients={ ingredientArray }/>
+            
         </div>
     );
 }
