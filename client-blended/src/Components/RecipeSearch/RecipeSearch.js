@@ -6,7 +6,7 @@ const RecipeSearch = props => {
     const [recipe, setRecipe] = useState("");
 
     const grabData = () => {
-        fetch('https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11007')
+        fetch('http://localhost:8181/get_recipe')
         .then(res => res.json())
         .then(data => setRecipe(data))
         .catch(err => setErrors(err));
@@ -19,7 +19,7 @@ const RecipeSearch = props => {
     return(
         <div>
             { (!errors && recipe) &&
-                <Recipe data={ recipe.drinks[0] } />
+                <Recipe data={ recipe } />
             }
         </div>
     );
