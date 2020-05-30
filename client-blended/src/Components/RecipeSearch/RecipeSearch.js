@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Recipe from '../Recipe/Recipe';
-const RecipeSearch = props => {
 
+const RecipeSearch = (props) => {
+    
     const [errors, setErrors] = useState(false);
     const [recipe, setRecipe] = useState("");
 
     const grabData = () => {
-        fetch('http://localhost:8181/get_recipe')
+        fetch('http://localhost:8181/get_recipe/mango')
         .then(res => res.json())
         .then(data => setRecipe(data))
         .catch(err => setErrors(err));
@@ -17,11 +18,11 @@ const RecipeSearch = props => {
     }, []);
 
     return(
-        <div>
+       <div>
             { (!errors && recipe) &&
-                <Recipe data={ recipe } />
+                <Recipe data={recipe} />
             }
-        </div>
+       </div>
     );
 }
 
