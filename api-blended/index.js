@@ -15,27 +15,40 @@ db.once('open', () => {
 
     var recipeSchema = new mongoose.Schema({
         name: String,
+        type: String,
+        ingredients: [{name: String, amount: String, amountType: String}],
+        categories: [String]
     });
 
     var Recipe = mongoose.model('Recipe', recipeSchema);
 
     var mango = new Recipe({
         name: "Tropical",
+        type: "SMOOTHIE",
+        ingredients: [
+            {name: "mango", amount: "1", amountType: "diced"},
+            {name: "frozen strawberries", amount: "1", amountType: "cup"},
+            {name: "low-fat vanilla yogurt", amount: "1", amountType: "cup"},
+            {name: "pineapple", amount: "6", amountType: "ounches"},
+            {name: "frozen blueberries", amount: "1/2", amountType: "cup"}
+        ],
+        categories: ["low_fat", "nut free"]
     });
 
     mango.save(() => {
-        
+        console.log("Saved");
     });
 
-    app.get('/get_recipe/:id', (req, res) => {
-    
-        Recipe.find({name: req.params.id}, (err, result) => {
-            res.send(result);
-        });
+    Recipe.find({name: "Tropical"}, (err, result) => {
+        console.log(err);
+        console.log(result);
     });
 });
 
 
+app.get('/get_recipe/:id', (req, res) => {
+    
+});
 
 
 const server = app.listen(8181, () => {
