@@ -11,32 +11,30 @@ const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-const Schema = mongoose.Schema;
-const recipeSchema = new Schema({
-    name: String,
-    type: String,
-    ingredients: [{name: String, amount: String, amountType: String}],
-    categories: [String]
+db.once('open', () => {
+
+    var recipeSchema = new mongoose.Schema({
+        name: String,
+    });
+
+    var Recipe = mongoose.model('Recipe', recipeSchema);
+
+    var mango = new Recipe({
+        name: "Tropical",
+    });
+
+    mango.save(() => {
+        
+    });
+
+    app.get('/get_recipe/:id', (req, res) => {
+    
+        Recipe.find({name: req.params.id}, (err, result) => {
+            res.send(result);
+        });
+    });
 });
 
-const Recipe = mongoose.model('Recipe', recipeSchema);
-
-const mango = new Recipe({
-    name: "Tropical Smoothie",
-    type: "SMOOTHIE",
-    ingredients: [
-        {name: "mango", amount: "1", amountType: "diced"},
-        {name: "frozen strawberries", amount: "1", amountType: "cup"},
-        {name: "low-fat vanilla yogurt", amount: "1", amountType: "cup"},
-        {name: "pineapple", amount: "6", amountType: "ounches"},
-        {name: "frozen blueberries", amount: "1/2", amountType: "cup"}
-    ],
-    categories: ["low_fat", "nut free"]
-});
-
-app.get('/get_recipe/tropical', (req, res) => {
-    res.send(mango);
-});
 
 
 
