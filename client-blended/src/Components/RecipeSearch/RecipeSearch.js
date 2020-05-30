@@ -6,16 +6,19 @@ const RecipeSearch = (props) => {
     const [errors, setErrors] = useState(false);
     const [recipe, setRecipe] = useState("");
 
-    const grabData = () => {
-        fetch('http://localhost:8181/get_recipe/mango')
+    const grabData = (res) => {
+        fetch('http://localhost:8181/get_recipe/' + res)
         .then(res => res.json())
-        .then(data => setRecipe(data))
+        .then(data => {
+            setRecipe(data);
+            setErrors(false)
+        })
         .catch(err => setErrors(err));
     }
 
     useEffect(() => {
-        grabData();
-    }, []);
+        grabData(props.result);
+    }, [props.result]);
 
     return(
        <div>

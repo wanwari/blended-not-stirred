@@ -18,7 +18,7 @@ const recipe = {
     categories: ["low_fat", "nut free"]
 };
 
-app.get('/get_recipe/mango', (req, res) => {
+app.get('/get_recipe/tropical', (req, res) => {
     res.send(recipe);
 });
 

@@ -1,11 +1,11 @@
 import React from 'react';
 
-import RecipeSearch from './Components/RecipeSearch/RecipeSearch';
+import Search from './Components/Search/Search';
 
 function App() {
   return (
     <div>
-        <RecipeSearch />
+        <Search />
     </div>
   );
 }
