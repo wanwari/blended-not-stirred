@@ -1,13 +1,13 @@
 import React from 'react';
-
-import Search from './Components/Search/Search';
-import PostTest from './Components/PostTest/PostTest';
-import SubmitRecipe from './Components/SubmitRecipe/SubmitRecipe';
+import { BrowserRouter } from 'react-router-dom';
+import Routing from './Components/Routing/Routing';
 
 function App() {
   return (
     <div>
-        <SubmitRecipe />
+        <BrowserRouter>
+            <Routing />
+        </BrowserRouter>
     </div>
   );
 }

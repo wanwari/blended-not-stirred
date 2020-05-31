@@ -37,6 +37,7 @@ app.post('/submit_recipe/', (req,res) => {
     //recieve a Recipe as a JSON object located in req.body
     
     //create a new mongoose Recipe model with the data
+    console.log(req.body);
     var recipeToSave = new Recipe(req.body);
     //save it to the database.
     recipeToSave.save();
