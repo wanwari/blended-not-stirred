@@ -6,7 +6,7 @@ import PostTest from './Components/PostTest/PostTest';
 function App() {
   return (
     <div>
-        <PostTest />
+        <Search />
     </div>
   );
 }

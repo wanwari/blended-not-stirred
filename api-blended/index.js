@@ -42,6 +42,8 @@ app.get('/get_recipe/:id', (req, res) => {
 
 app.post('/submit_recipe/', (req,res) => {
     console.log("post " + req.body.name);
+    var newSubmit = new Recipe(req.body);
+    newSubmit.save();
 });
 
 
