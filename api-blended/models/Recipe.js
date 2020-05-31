@@ -1,10 +1,10 @@
 /*
 * Recipe.js
 * Author: Wiesa Anwari
-* Create model 
+* create and export mongoose Recipe model 
 */
 
-const db = require('../db');
+const db = require('../database');
 
 const Recipe = db.model('Recipe', {
     name: String,

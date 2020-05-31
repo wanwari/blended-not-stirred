@@ -1,3 +1,9 @@
+/*
+* index.js
+* Author: Wiesa Anwari
+* entry point for blended-not-stirred api
+*/
+
 const express = require('express');
 const cors = require('cors')
 const bodyParser = require('body-parser');
@@ -8,32 +14,19 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+//import the Recipe mongoose model
 var Recipe = require('./models/Recipe')
 
 app.get('/get_recipe/:id', (req, res) => {
-/*
-    var mango = new Recipe({ 
-        name: "Tropical Smoothie",
-        type: "SMOOTHIE",
-        ingredients: [
-            {name: "mango", amount: "1", amountType: "diced"},
-            {name: "frozen strawberries", amount: "1", amountType: "cup"},
-            {name: "low-fat vanilla yogurt", amount: "1", amountType: "cup"},
-            {name: "pineapple", amount: "6", amountType: "ounches"},
-            {name: "frozen blueberries", amount: "1/2", amountType: "cup"}
-        ],
-        categories: ["low_fat", "nut free"]
-     });
 
-    mango.save(() => {
-        console.log("Saved");
-        Recipe.find({}, (err, result) => {
-        console.log(result);
-    })
-    });
-*/
+    /* TODO
+    * write search algorithm to find and return an array of 
+    * recipies based on search text located in req.params.id
+    */
+
     console.log(req.params.id);
 
+    //currently returns the first recipe with a matching name
     Recipe.find({name: req.params.id}, (err, result) => {
         res.send(result[0]);
     })
@@ -41,12 +34,14 @@ app.get('/get_recipe/:id', (req, res) => {
 });
 
 app.post('/submit_recipe/', (req,res) => {
-    console.log("post " + req.body.name);
-    var newSubmit = new Recipe(req.body);
-    newSubmit.save();
+    //recieve a Recipe as a JSON object located in req.body
+    
+    //create a new mongoose Recipe model with the data
+    var recipeToSave = new Recipe(req.body);
+    //save it to the database.
+    recipeToSave.save();
 });
 
-
 const server = app.listen(8181, () => {
-    console.log("Listening at ", server.address().port);
+    console.log("[index.js] Listening at ", server.address().port);
 });
