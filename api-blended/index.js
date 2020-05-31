@@ -1,29 +1,16 @@
 const express = require('express');
 const cors = require('cors')
-const mongoose = require('mongoose');
+
 
 const app = express();
 app.use(cors());
 
-const mongoDB = 'mongodb://localhost/recipe_db';
-mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
-const db = mongoose.connection;
+var Recipe = require('./models/Recipe')
 
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
-db.once('open', () => {
-
-    var recipeSchema = new mongoose.Schema({
-        name: String,
-        type: String,
-        ingredients: [{name: String, amount: String, amountType: String}],
-        categories: [String]
-    });
-
-    var Recipe = mongoose.model('Recipe', recipeSchema);
-
-    var mango = new Recipe({
-        name: "Tropical",
+app.get('/get_recipe/:id', (req, res) => {
+/*
+    var mango = new Recipe({ 
+        name: "Tropical Smoothie",
         type: "SMOOTHIE",
         ingredients: [
             {name: "mango", amount: "1", amountType: "diced"},
@@ -33,22 +20,21 @@ db.once('open', () => {
             {name: "frozen blueberries", amount: "1/2", amountType: "cup"}
         ],
         categories: ["low_fat", "nut free"]
-    });
+     });
 
     mango.save(() => {
         console.log("Saved");
-    });
-
-    Recipe.find({name: "Tropical"}, (err, result) => {
-        console.log(err);
+        Recipe.find({}, (err, result) => {
         console.log(result);
+    })
     });
+*/
+    Recipe.find({}, (err, result) => {
+        console.log(result[0].ingredients[1].name);
+    })
+
 });
-
-
-app.get('/get_recipe/:id', (req, res) => {
     
-});
 
 
 const server = app.listen(8181, () => {
