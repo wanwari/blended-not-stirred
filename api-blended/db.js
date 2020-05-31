@@ -1,3 +1,9 @@
+/*
+* db.js
+* Author: Wiesa Anwari
+* Open connection to mongo database
+*/
+
 const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/recipe_db', 

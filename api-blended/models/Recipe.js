@@ -1,3 +1,9 @@
+/*
+* Recipe.js
+* Author: Wiesa Anwari
+* Create model 
+*/
+
 const db = require('../db');
 
 const Recipe = db.model('Recipe', {

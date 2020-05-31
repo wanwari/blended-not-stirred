@@ -1,9 +1,12 @@
 const express = require('express');
 const cors = require('cors')
-
+const bodyParser = require('body-parser');
 
 const app = express();
+
 app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 var Recipe = require('./models/Recipe')
 
@@ -29,12 +32,17 @@ app.get('/get_recipe/:id', (req, res) => {
     })
     });
 */
-    Recipe.find({}, (err, result) => {
-        console.log(result[0].ingredients[1].name);
-    })
+    console.log(req.params.id);
 
-});
+    Recipe.find({name: req.params.id}, (err, result) => {
+        res.send(result[0]);
+    })
     
+});
+
+app.post('/submit_recipe/', (req,res) => {
+    console.log("post " + req.body.name);
+});
 
 
 const server = app.listen(8181, () => {
