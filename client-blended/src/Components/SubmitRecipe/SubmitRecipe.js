@@ -13,59 +13,26 @@ const SubmitRecipe = () => {
     const [ingredientQuantity, setIngredientQuantity] = useState([]);
     const [ingredientQuantityType, setIngredientQuantityType] = useState([]);
 
-    const handleRecipeNameChange = (event) => {
-        setRecipeName(event.target.value);
+    const handleSingleInputChange = (event, setHook) => {
+        setHook(event.target.value);
     }
 
-    const handleRecipeTypeChange = (event) => {  
-        setRecipeType(event.target.value);
+    const handleMultipleInputChange = (index, event, hook, setHook) => {
+        let tmpArray = [...hook];
+        tmpArray[index] = event.target.value;
+        setHook(tmpArray);
     }
 
-    const handleCategoriesChange = (index, event) => {
-        let newArr = [...categories];
-        newArr[index] = event.target.value;
-        setCategories(newArr);
-    }
-
-    const addNewInput = (type) => {  
-        switch (type) {
-            case "CATEGORIES":
-                setCategoriesInput(prevCategories => [...prevCategories, ""]);
-                break;
-            case "INGREDIENT": 
-                setIngredientsInput(prevName => [...prevName, ""]);
-                break;
-            default:
-                console.log("Err: unhandled param passed");
-                break;
-        }
-    }
-
-    const handleIngredientChange = (index, event, type) => {
-        let tmpArray;
-        switch (type) {
-            case "NAME":
-                tmpArray = [...ingredientName];
-                tmpArray[index] = event.target.value;
-                setIngredientName(tmpArray);
-                break;
-            case "QUANTITY":
-                tmpArray = [...ingredientQuantity];
-                tmpArray[index] = event.target.value;
-                setIngredientQuantity(tmpArray);
-                break;
-            case "QUANTITYTYPE":
-                tmpArray = [...ingredientQuantityType];
-                tmpArray[index] = event.target.value;
-                setIngredientQuantityType(tmpArray);
-                break;
-            default:
-                console.log("Err: unhandled param passed");
-                break;
-        }
+    const addNewInput = (setHook) => {
+        setHook(prevInput => [...prevInput, ""]);
     }
 
     const handleSubmit = () => {
+        /* TODO
+        * format Data
+        * attempt to submit to db
+        * return sucess/fail status
+        */
         console.log(recipeName);
         console.log(recipeType);
         console.log(categories);
@@ -78,28 +45,28 @@ const SubmitRecipe = () => {
         <div>
             <form>
                 <label htmlFor="recipeName">Name: </label>
-                <input id="recipeName" type="text" value={ recipeName } onChange={ handleRecipeNameChange } />  <br></br><br></br>
+                <input id="recipeName" type="text" value={ recipeName } onChange={ (event) => handleSingleInputChange(event, setRecipeName) } />  <br></br><br></br>
 
                 <label htmlFor="recipeType">Type: </label>
-                <input id="type" type="text" value={ recipeType } onChange={ handleRecipeTypeChange } />
+                <input id="type" type="text" value={ recipeType } onChange={ (event) => handleSingleInputChange(event, setRecipeType) } />
 
                 <h3>Categories</h3>
                 {categoriesInput.map((cat, index) => (
-                    <input key={index} onChange={ (event) => handleCategoriesChange(index, event) } type="text" />
+                    <input key={index} onChange={ (event) => handleMultipleInputChange(index, event, categories, setCategories) } type="text" />
                 ))}
 
-                <input type="button" onClick={ () => addNewInput("CATEGORIES") } value="Add Category" />
+                <input type="button" onClick={ () => addNewInput(setCategoriesInput) } value="Add Category" />
                 
                 <h3>Ingredients</h3>
                 {ingredientsInput.map((ing, index) => (
                     <div>
-                        <input key={index} onChange={ (event) => handleIngredientChange(index, event, "NAME") } type="text" />
-                        <input key={index} onChange={ (event) => handleIngredientChange(index, event, "QUANTITY") } type="text" />
-                        <input key={index} onChange={ (event) => handleIngredientChange(index, event, "QUANTITYTYPE") } type="text" />
+                        <input key={index} onChange={ (event) => handleMultipleInputChange(index, event, ingredientName, setIngredientName) } type="text" />
+                        <input key={index} onChange={ (event) => handleMultipleInputChange(index, event, ingredientQuantity, setIngredientQuantity) } type="text" />
+                        <input key={index} onChange={ (event) => handleMultipleInputChange(index, event, ingredientQuantityType, setIngredientQuantityType) } type="text" />
                     </div>
                 ))}
 
-                <input type="button" onClick={ () => addNewInput("INGREDIENT") } value="Add Ingredient" />
+                <input type="button" onClick={ () => addNewInput(setIngredientsInput) } value="Add Ingredient" />
 
                 <div>
                     <input type="button" onClick={ handleSubmit } value="Submit" />
