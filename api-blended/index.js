@@ -25,10 +25,17 @@ app.get('/get_recipe/:id', (req, res) => {
     */
 
     console.log(req.params.id);
-
+    const searchQuery = req.params.id.toUpperCase();
+    console.log(searchQuery);
+    
     //currently returns the first recipe with a matching name
-    Recipe.find({name: req.params.id}, (err, result) => {
-        res.send(result[0]);
+    Recipe.find(searchQuery, (err, result) => {
+        if(result) {
+            res.send(result[0]);
+        } else {
+            console.log("Could not find");
+        }
+        
     })
     
 });
@@ -41,6 +48,18 @@ app.post('/submit_recipe/', (req,res) => {
     var recipeToSave = new Recipe(req.body);
     //save it to the database.
     recipeToSave.save();
+});
+
+app.post('/list_all/', (req,res) => {
+    Recipe.find({}, function(err, result) { 
+        console.log(result);
+     });
+});
+
+app.post('/drop_db/', (req,res) => {
+    Recipe.deleteMany({}, function(err) { 
+        console.log('collection removed');
+     });
 });
 
 const server = app.listen(8181, () => {
