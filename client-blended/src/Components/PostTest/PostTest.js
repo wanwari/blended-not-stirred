@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 const PostTest = () => {
-
+/*
     useEffect(() => {
         fetch('http://localhost:8181/submit_recipe', {
         method: 'POST',
@@ -21,7 +21,7 @@ const PostTest = () => {
             })
         })
     });
-
+*/
     return(
         <div>
             <h1>PostTest</h1>
