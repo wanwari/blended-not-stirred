@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 const PostTest = () => {
-/*
-    useEffect(() => {
+
+    const handleSubmit = () => {
         fetch('http://localhost:8181/submit_recipe', {
         method: 'POST',
         headers: {
@@ -20,11 +20,23 @@ const PostTest = () => {
                 categories: ["low_fat", "nut free"]
             })
         })
-    });
-*/
+    }
+
+    const handleList = () => {
+        fetch('http://localhost:8181/list_all/', {
+        method: 'POST'});
+    }
+
+    const handleDelete = () => {
+        fetch('http://localhost:8181/drop_db/', {
+        method: 'POST'});
+    }
+
     return(
         <div>
-            <h1>PostTest</h1>
+            <input type="button" value="Submit Recipe" onClick={ handleSubmit } />
+            <input type="button" value="List All Recipies" onClick={ handleList } />
+            <input type="button" value="Delete All Recipe" onClick={ handleDelete } />
         </div>
     );
 }
