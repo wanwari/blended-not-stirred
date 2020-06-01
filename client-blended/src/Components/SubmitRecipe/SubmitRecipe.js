@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import MakePost from './MakePost';
 
 const SubmitRecipe = () => {
 
@@ -19,7 +20,7 @@ const SubmitRecipe = () => {
 
     const handleMultipleInputChange = (index, event, hook, setHook) => {
         let tmpArray = [...hook];
-        tmpArray[index] = event.target.value;
+        tmpArray[index] = event.target.value.toUpperCase();
         setHook(tmpArray);
     }
 
@@ -32,13 +33,29 @@ const SubmitRecipe = () => {
         * format Data
         * attempt to submit to db
         * return sucess/fail status
-        */
+        
         console.log(recipeName);
         console.log(recipeType);
         console.log(categories);
         console.log(ingredientName);
         console.log(ingredientQuantity);
         console.log(ingredientQuantityType);
+        */
+        var tmpIng = [{}];
+        ingredientName.map((ing, index) => {
+            tmpIng[index] = {name: ingredientName[index], amount: ingredientQuantity[index], amountType: ingredientQuantityType[index]}
+        });
+
+        const data = {
+            name: recipeName,
+            type: recipeType,
+            ingredients: tmpIng,
+            categories: categories
+        };
+
+        console.log(tmpIng);
+
+        MakePost(data);
     }
 
     return(

@@ -23,13 +23,10 @@ app.get('/get_recipe/:id', (req, res) => {
     * write search algorithm to find and return an array of 
     * recipies based on search text located in req.params.id
     */
-
-    console.log(req.params.id);
-    const searchQuery = req.params.id.toUpperCase();
-    console.log(searchQuery);
+    const searchQuery = req.params.id;
     
     //currently returns the first recipe with a matching name
-    Recipe.find(searchQuery, (err, result) => {
+    Recipe.find({name: searchQuery}, (err, result) => {
         if(result) {
             res.send(result[0]);
         } else {
