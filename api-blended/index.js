@@ -26,14 +26,9 @@ app.get('/get_recipe/:id', (req, res) => {
     const searchQuery = req.params.id;
     
     //currently returns the first recipe with a matching name
-    Recipe.find({name: searchQuery}, (err, result) => {
-        if(result) {
-            res.send(result[0]);
-        } else {
-            console.log("Could not find");
-        }
-        
-    })
+    Recipe.find({name: searchQuery}, function(err, result) { 
+        console.log(result);
+     });
     
 });
 
@@ -50,6 +45,8 @@ app.post('/submit_recipe/', (req,res) => {
 app.post('/list_all/', (req,res) => {
     Recipe.find({}, function(err, result) { 
         console.log(result);
+        console.log("========================================================")
+        console.log(result.map(ing => (console.log(ing.ingredients))));
      });
 });
 

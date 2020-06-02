@@ -20,7 +20,7 @@ const SubmitRecipe = () => {
 
     const handleMultipleInputChange = (index, event, hook, setHook) => {
         let tmpArray = [...hook];
-        tmpArray[index] = event.target.value.toUpperCase();
+        tmpArray[index] = event.target.value;
         setHook(tmpArray);
     }
 
