@@ -29,20 +29,8 @@ const SubmitRecipe = () => {
     }
 
     const handleSubmit = () => {
-        /* TODO
-        * format Data
-        * attempt to submit to db
-        * return sucess/fail status
-        
-        console.log(recipeName);
-        console.log(recipeType);
-        console.log(categories);
-        console.log(ingredientName);
-        console.log(ingredientQuantity);
-        console.log(ingredientQuantityType);
-        */
         var tmpIng = [{}];
-        ingredientName.map((ing, index) => {
+        ingredientName.forEach((ing, index) => {
             tmpIng[index] = {name: ingredientName[index], amount: ingredientQuantity[index], amountType: ingredientQuantityType[index]}
         });
 
@@ -54,7 +42,6 @@ const SubmitRecipe = () => {
         };
 
         console.log(tmpIng);
-
         MakePost(data);
     }
 
@@ -76,10 +63,10 @@ const SubmitRecipe = () => {
                 
                 <h3>Ingredients</h3>
                 {ingredientsInput.map((ing, index) => (
-                    <div>
-                        <input key={index} onChange={ (event) => handleMultipleInputChange(index, event, ingredientName, setIngredientName) } type="text" />
-                        <input key={index} onChange={ (event) => handleMultipleInputChange(index, event, ingredientQuantity, setIngredientQuantity) } type="text" />
-                        <input key={index} onChange={ (event) => handleMultipleInputChange(index, event, ingredientQuantityType, setIngredientQuantityType) } type="text" />
+                    <div key={index}>
+                        <input onChange={ (event) => handleMultipleInputChange(index, event, ingredientName, setIngredientName) } type="text" />
+                        <input onChange={ (event) => handleMultipleInputChange(index, event, ingredientQuantity, setIngredientQuantity) } type="text" />
+                        <input onChange={ (event) => handleMultipleInputChange(index, event, ingredientQuantityType, setIngredientQuantityType) } type="text" />
                     </div>
                 ))}
 
