@@ -19,8 +19,13 @@ const RecipeSearch = (props) => {
     }
 
     useEffect(() => {
+        setSelectedRecipe(null);
         grabData(props.result);
     }, [props.result]);
+
+    const handleBackClicked = () => {
+        setSelectedRecipe(null);
+    }
 
     return(
        <div>
@@ -29,6 +34,7 @@ const RecipeSearch = (props) => {
                 ? <RecipeList data={recipes} onRecipeClick={ (r) => setSelectedRecipe(r) } /> 
                 : <Recipe data={ selectedRecipe } />)
             }
+            <input type="button" value="Back" onClick={ handleBackClicked }/>
        </div>
     );
 }
