@@ -27,7 +27,12 @@ app.get('/get_recipe/:id', (req, res) => {
     
     //currently returns the first recipe with a matching name
     Recipe.find({name: searchQuery}, function(err, result) { 
-        console.log(result);
+        if(result === undefined || result.length == 0) {
+            console.log("Not Found");
+            console.log(err);
+        } else {
+            res.send(result);
+        }
      });
     
 });
@@ -52,7 +57,7 @@ app.post('/list_all/', (req,res) => {
 
 app.post('/drop_db/', (req,res) => {
     Recipe.deleteMany({}, function(err) { 
-        console.log('collection removed');
+        console.log('[index.js] Dropped all collections from database');
      });
 });
 
