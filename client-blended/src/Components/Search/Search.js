@@ -5,16 +5,28 @@ import RecipeSearch from '../RecipeSearch/RecipeSearch';
 const Search = () => {
 
     const [searchValue, setSearchValue] = useState("");
+    const [currentSearch, setCurrentSearch] = useState("");
 
-    const handleSearchChange = (event) => {
-        setSearchValue(event.target.value)
+    const handleSearchChange = event => {
+        setCurrentSearch(event.target.value);
+    }
+
+    const handleSearchClick = event => {
+        setSearchValue(currentSearch);
+        console.log("new search " + currentSearch);
+    }
+
+    const handleKeyDown = event => {
+        if (event.key === 'Enter')
+            handleSearchClick();
     }
 
     return(
         <div>
             <h1>Search.js</h1>
 
-            <input type="text" value={ searchValue } onChange={ handleSearchChange } />
+            <input type="text" value={ currentSearch } onChange={ handleSearchChange } onKeyDown={ handleKeyDown } />
+            <input type="button" value="Search" onClick={ handleSearchClick } />
             <RecipeSearch result={ searchValue } />
 
         </div>

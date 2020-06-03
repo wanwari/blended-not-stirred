@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
+import RecipeList from '../RecipeList/RecipeList';
 import Recipe from '../Recipe/Recipe';
 
 const RecipeSearch = (props) => {
     
     const [errors, setErrors] = useState(false);
-    const [recipe, setRecipe] = useState("");
+    const [recipes, setRecipes] = useState("");
+    const [selectedRecipe, setSelectedRecipe] = useState(null);
 
     const grabData = (res) => {
         fetch('http://localhost:8181/get_recipe/' + res)
         .then(res => res.json())
         .then(data => {
-            setRecipe(data);
+            setRecipes(data);
             setErrors(false)
         })
         .catch(err => setErrors(err));
@@ -22,8 +24,12 @@ const RecipeSearch = (props) => {
 
     return(
        <div>
-            { (!errors && recipe) &&
-                <Recipe data={recipe} />
+            { (!errors && recipes) 
+            ? 
+                (selectedRecipe === null 
+                ? <RecipeList data={recipes} onRecipeClick={ (r) => setSelectedRecipe(r) } /> 
+                : <Recipe data={ selectedRecipe } />)
+            : console.log()
             }
        </div>
     );
