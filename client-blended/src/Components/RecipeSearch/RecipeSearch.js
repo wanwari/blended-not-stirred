@@ -5,15 +5,20 @@ import Recipe from '../Recipe/Recipe';
 const RecipeSearch = (props) => {
     
     const [errors, setErrors] = useState(false);
-    const [recipes, setRecipes] = useState("");
+    const [err, setErr] = useState("");
+    const [recipes, setRecipes] = useState();
     const [selectedRecipe, setSelectedRecipe] = useState(null);
 
     const grabData = (res) => {
         fetch('http://localhost:8181/get_recipe/' + res)
         .then(res => res.json())
         .then(data => {
-            setRecipes(data);
-            setErrors(false)
+            if (!data)
+                setErr("No recipe found matching ");
+            else {
+                setRecipes(data);
+                setErrors(false);
+            }
         })
         .catch(err => setErrors(err));
     }
@@ -29,6 +34,10 @@ const RecipeSearch = (props) => {
 
     return(
        <div>
+            {errors &&
+                <h1>{ err + " " + props.result}</h1>
+            }           
+           
             { (!errors && recipes) &&
                 (selectedRecipe === null 
                 ? <RecipeList data={recipes} onRecipeClick={ (r) => setSelectedRecipe(r) } /> 
