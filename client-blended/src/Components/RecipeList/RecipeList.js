@@ -1,20 +1,15 @@
-import React, { useState } from 'react';
-import Recipe from '../Recipe/Recipe';
+import React from 'react';
 
 const RecipeList = props => {
 
-    const [dataToUse, setDataToUse] = useState();
-
-
-    const recipeClickHandler = (event, recipe) => {
+    const recipeClickHandler = (recipe) => {
         props.onRecipeClick(recipe);
     }
-
 
     return(
         <div>
             {props.data.map((ing, index) => (
-                <li key={ index } onClick={ (event) => recipeClickHandler(event, ing) } >{ ing.name } { ing.type} </li>
+                <li key={ index } onClick={ (event) => recipeClickHandler(ing) } >{ ing.name } { ing.type} </li>
             ))}  
         </div>
     );

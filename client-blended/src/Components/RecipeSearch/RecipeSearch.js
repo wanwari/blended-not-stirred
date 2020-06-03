@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import RecipeList from '../RecipeList/RecipeList';
 import Recipe from '../Recipe/Recipe';
 
@@ -24,12 +24,10 @@ const RecipeSearch = (props) => {
 
     return(
        <div>
-            { (!errors && recipes) 
-            ? 
+            { (!errors && recipes) &&
                 (selectedRecipe === null 
                 ? <RecipeList data={recipes} onRecipeClick={ (r) => setSelectedRecipe(r) } /> 
                 : <Recipe data={ selectedRecipe } />)
-            : console.log()
             }
        </div>
     );

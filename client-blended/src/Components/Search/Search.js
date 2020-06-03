@@ -11,9 +11,8 @@ const Search = () => {
         setCurrentSearch(event.target.value);
     }
 
-    const handleSearchClick = event => {
+    const handleSearchClick = () => {
         setSearchValue(currentSearch);
-        console.log("new search " + currentSearch);
     }
 
     const handleKeyDown = event => {
