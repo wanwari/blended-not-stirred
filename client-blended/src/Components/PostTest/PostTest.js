@@ -22,21 +22,9 @@ const PostTest = () => {
         })
     }
 
-    const handleList = () => {
-        fetch('http://localhost:8181/list_all/', {
-        method: 'POST'});
-    }
-
-    const handleDelete = () => {
-        fetch('http://localhost:8181/drop_db/', {
-        method: 'POST'});
-    }
-
     return(
         <div>
             <input type="button" value="Submit Recipe" onClick={ handleSubmit } />
-            <input type="button" value="List All Recipies" onClick={ handleList } />
-            <input type="button" value="Delete All Recipe" onClick={ handleDelete } />
         </div>
     );
 }
