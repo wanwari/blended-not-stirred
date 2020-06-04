@@ -9,7 +9,7 @@ const Recipe = props => {
             <h1>{ props.data.name }</h1>
             <h2>{ props.data.type }</h2>
             <Ingredient ingredients={ props.data.ingredients }/>
-            
+            {props.data.categories[0]}
         </div>
     );
 }

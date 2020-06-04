@@ -9,9 +9,9 @@ const RecipeSearch = (props) => {
     const [recipes, setRecipes] = useState();
     const [selectedRecipe, setSelectedRecipe] = useState(null);
 
-    const grabData = (res) => {
+    const grabData = (res, arr) => {
         if (res !== "") {
-            fetch('http://localhost:8181/recipies/' + res)
+            fetch('http://localhost:8181/recipies/' + res + "/" + arr)
             .then(res => res.json())
             .then(data => {
                 if (data.length === 0) {
@@ -29,7 +29,10 @@ const RecipeSearch = (props) => {
 
     useEffect(() => {
         setSelectedRecipe(null);
-        grabData(props.result);
+        grabData(props.result, JSON.stringify(props.categories));
+        
+        console.log(JSON.stringify(props.categories));
+
     }, [props.result]);
 
     const handleBackClicked = () => {

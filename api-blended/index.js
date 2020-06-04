@@ -27,15 +27,35 @@ app.get('/recipies', (req, res) => {
     });
 });
 
+//let checker = (arrayToSearch, arr) => arrayToSearch.every(v => arr.includes(v));
+
 //GET /recipies/:id
-app.get('/recipies/:id', (req, res) => {
+app.get('/recipies/:id/:arr', (req, res) => {
     const id = req.params.id;
+    const categoriesToSearch = JSON.parse(req.params.arr);
+    
     console.log('[index.js] GET request made at /recipies/' + id);
+
     Recipes.find({name: id}, (err, results) => {
+        let dataToSend = [];
         if (!err) {
-            res.send(results);
+            results.map((currentResult) => {
+                let valid = false;
+                for (let i = 0; i < categoriesToSearch.length; i++) {
+                    if (currentResult.categories.includes(categoriesToSearch[i]))
+                        valid = true;
+                    else {
+                        valid = false;
+                        break;
+                    }
+                }
+                if (valid)
+                    dataToSend.push(currentResult);
+            });
+            res.send(dataToSend);
         }
     });
+    
 });
 
 //POST /recipies
