@@ -46,16 +46,23 @@ app.post('/submit_recipe/', (req,res) => {
     recipeToSave.save();
 });
 
-app.post('/list_all/', (req,res) => {
+app.get('/list_all/', (req,res) => {
     Recipe.find({}, function(err, result) { 
         console.log(result);
+        res.send(result);
      });
 });
 
-app.post('/drop_db/', (req,res) => {
-    Recipe.deleteMany({}, function(err) { 
-        console.log('[index.js] Dropped all collections from database');
+app.post('/delete_recipe/:id', (req,res) => {
+    console.log("Here");
+    
+    const idToDelete = req.params.id;
+    console.log(idToDelete);
+    
+    Recipe.remove({_id: idToDelete}, function(err, result) { 
+        console.log(result)
      });
+     
 });
 
 const server = app.listen(8181, () => {
