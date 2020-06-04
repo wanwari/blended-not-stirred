@@ -4,15 +4,17 @@ import { Link, Switch, Route } from 'react-router-dom';
 import Search from '../Search/Search';
 import PostTest from '../PostTest/PostTest';
 import SubmitRecipe from '../SubmitRecipe/SubmitRecipe';
+import AdminPanel from '../AdminPanel/AdminPanel';
 
 const Routing = () => {
     return(
         <div>
             <ul>
                 <li><Link to="/search">search</Link></li>
-                <li><Link to="/posttest" >posttest</Link></li>
-                <li><Link to="/submitrecipe" >submitrecipe</Link></li>
-            </ul>
+                <li><Link to="/posttest">posttest</Link></li>
+                <li><Link to="/submitrecipe">submitrecipe</Link></li>
+                <li><Link to="/adminpanel">Admin Panel</Link></li>
+           </ul>
 
             <Switch>
                 <Route path="/search">
@@ -23,6 +25,9 @@ const Routing = () => {
                 </Route>
                 <Route path="/submitrecipe">
                     <SubmitRecipe />
+                </Route>
+                <Route path="/adminpanel">
+                    <AdminPanel />
                 </Route>
             </Switch>
         </div>
