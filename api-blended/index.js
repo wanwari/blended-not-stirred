@@ -27,8 +27,6 @@ app.get('/recipies', (req, res) => {
     });
 });
 
-//let checker = (arrayToSearch, arr) => arrayToSearch.every(v => arr.includes(v));
-
 //GET /recipies/:id
 app.get('/recipies/:id/:arr', (req, res) => {
     const id = req.params.id;
