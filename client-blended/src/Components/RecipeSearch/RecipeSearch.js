@@ -35,15 +35,18 @@ const RecipeSearch = (props) => {
     return(
        <div>
             {errors &&
-                <h1>{ err + " " + props.result}</h1>
+                <p>{ err + " " + props.result}</p>
             }           
            
-            { (!errors && recipes) &&
+            {(!errors && recipes) &&
                 (selectedRecipe === null 
                 ? <RecipeList data={recipes} onRecipeClick={ (r) => setSelectedRecipe(r) } /> 
                 : <Recipe data={ selectedRecipe } />)
             }
-            <input type="button" value="Back" onClick={ handleBackClicked }/>
+            {(selectedRecipe !== null) &&
+                <input type="button" value="Back" onClick={ handleBackClicked }/>
+            }
+            
        </div>
     );
 }
