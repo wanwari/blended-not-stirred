@@ -3,7 +3,6 @@ import React from 'react';
 import { Link, Switch, Route } from 'react-router-dom';
 import Search from '../Search/Search';
 import PostTest from '../PostTest/PostTest';
-import SubmitRecipe from '../SubmitRecipe/SubmitRecipe';
 import AdminPanel from '../AdminPanel/AdminPanel';
 
 const Routing = () => {
@@ -12,7 +11,6 @@ const Routing = () => {
             <ul>
                 <li><Link to="/search">search</Link></li>
                 <li><Link to="/posttest">posttest</Link></li>
-                <li><Link to="/submitrecipe">submitrecipe</Link></li>
                 <li><Link to="/adminpanel">Admin Panel</Link></li>
            </ul>
 
@@ -22,9 +20,6 @@ const Routing = () => {
                 </Route>
                 <Route path="/posttest">
                     <PostTest />
-                </Route>
-                <Route path="/submitrecipe">
-                    <SubmitRecipe />
                 </Route>
                 <Route path="/adminpanel">
                     <AdminPanel />

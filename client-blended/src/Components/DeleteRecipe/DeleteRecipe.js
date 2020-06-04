@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import RecipeList from '../RecipeList/RecipeList';
 
 const DeleteRecipe = () => {
 
     const [allRecipies, setAllRecipies] = useState(null);
 
     const grabData = () => {
-        fetch('http://localhost:8181/list_all/')
+        fetch('http://localhost:8181/recipies')
         .then(res => res.json())
         .then(data => {
             setAllRecipies(data);
@@ -16,11 +17,14 @@ const DeleteRecipe = () => {
         grabData();
     }, []);
 
-    const handleRecipeClick = (index) => {
-        console.log('http://localhost:8181/delete_recipe/' + allRecipies[index]._id);
+
+
+    const handleRecipeClick = (clickedRecipe) => {
+
+        console.log('http://localhost:8181/recipies/' + clickedRecipe._id);
         
-        fetch('http://localhost:8181/delete_recipe/' + allRecipies[index]._id , {
-        method: 'POST',
+        fetch('http://localhost:8181/recipies/' + clickedRecipe._id , {
+        method: 'DELETE',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -32,12 +36,9 @@ const DeleteRecipe = () => {
     return(
         <div>
             <h2>DeleteRecipe.js</h2>
+
             {(allRecipies !== null) &&
-                allRecipies.map((reci, index) => (
-                <div key={ reci._id }>
-                    <input type="button"  onClick={ () => handleRecipeClick(index) } value={ reci._id + " " + reci.name } />
-                </div>
-                ))
+                <RecipeList data={ allRecipies } onRecipeClick={ (clickedRecipe) => handleRecipeClick(clickedRecipe) } />
             }
         </div>
     );

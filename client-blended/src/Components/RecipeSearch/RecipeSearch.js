@@ -10,17 +10,21 @@ const RecipeSearch = (props) => {
     const [selectedRecipe, setSelectedRecipe] = useState(null);
 
     const grabData = (res) => {
-        fetch('http://localhost:8181/get_recipe/' + res)
-        .then(res => res.json())
-        .then(data => {
-            if (!data)
-                setErr("No recipe found matching ");
-            else {
-                setRecipes(data);
-                setErrors(false);
-            }
-        })
-        .catch(err => setErrors(err));
+        if (res !== "") {
+            fetch('http://localhost:8181/recipies/' + res)
+            .then(res => res.json())
+            .then(data => {
+                if (data.length === 0) {
+                    setErr("No recipe found matching ");
+                    setErrors(true);
+                } else {
+                    setRecipes(data);
+                    setErrors(false);
+                }
+            })
+            .catch(err => setErrors(err));
+        }
+        
     }
 
     useEffect(() => {

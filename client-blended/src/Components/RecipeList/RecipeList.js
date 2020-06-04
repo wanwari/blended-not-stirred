@@ -9,7 +9,7 @@ const RecipeList = props => {
     return(
         <div>
             {props.data.map((ing, index) => (
-                <li key={ index } onClick={ (event) => recipeClickHandler(ing) } >{ ing.name } { ing.type} </li>
+                <input type="submit" key={ index } onClick={ (event) => recipeClickHandler(ing) } value={ ing.name +  ing.type} />
             ))}  
         </div>
     );

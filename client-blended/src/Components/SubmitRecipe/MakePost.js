@@ -15,7 +15,7 @@ const postData = async (url, data) => {
 
 const MakePost = (dataToPost) => {
 
-        postData('http://localhost:8181/submit_recipe',
+        postData('http://localhost:8181/recipies',
         JSON.stringify({
             name: dataToPost.name,
             type: dataToPost.type,
