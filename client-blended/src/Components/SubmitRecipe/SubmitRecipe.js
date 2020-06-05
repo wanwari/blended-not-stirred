@@ -51,6 +51,8 @@ const SubmitRecipe = () => {
         setSuccesfullySubmitted(false);
         setRecipeName("");
         setRecipeType("");
+        setCategoriesInput([""]);
+        setIngredientsInput([""]);
     }
 
     const submitForm = (

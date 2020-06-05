@@ -31,7 +31,6 @@ const DeleteRecipe = () => {
     }, [grabData]); 
 
     const handleRecipeClick = (clickedRecipe) => {
-        console.log(allRecipies.indexOf(clickedRecipe));
         let tmpArray = [...allRecipies];
         tmpArray.splice(allRecipies.indexOf(clickedRecipe), 1);
         setAllRecipies(tmpArray);
