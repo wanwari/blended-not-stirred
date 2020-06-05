@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import MakePost from './MakePost';
+import postData from '../Networking/postData';
 
 const SubmitRecipe = () => {
 
@@ -41,8 +41,7 @@ const SubmitRecipe = () => {
             categories: categories
         };
 
-        console.log(tmpIng);
-        MakePost(data);
+        postData('http://localhost:8181/recipies', data);
     }
 
     return(

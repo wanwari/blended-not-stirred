@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import RecipeList from '../RecipeList/RecipeList';
 import Recipe from '../Recipe/Recipe';
 
+import getData from '../Networking/getData';
+
 const RecipeSearch = (props) => {
     
     const [errors, setErrors] = useState(false);
@@ -11,8 +13,7 @@ const RecipeSearch = (props) => {
 
     const grabData = (res, arr) => {
         if (res !== "") {
-            fetch('http://localhost:8181/recipies/' + res + "/" + arr)
-            .then(res => res.json())
+            getData('http://localhost:8181/recipies/' + res + "/" + arr)
             .then(data => {
                 if (data.length === 0) {
                     setErr("No recipe found matching ");
