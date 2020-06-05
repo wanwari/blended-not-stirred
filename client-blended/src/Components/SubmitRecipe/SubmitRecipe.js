@@ -14,6 +14,8 @@ const SubmitRecipe = () => {
     const [ingredientQuantity, setIngredientQuantity] = useState([]);
     const [ingredientQuantityType, setIngredientQuantityType] = useState([]);
 
+    const [succesfullySubmitted, setSuccesfullySubmitted] = useState(false);
+
     const handleSingleInputChange = (event, setHook) => {
         setHook(event.target.value);
     }
@@ -41,42 +43,62 @@ const SubmitRecipe = () => {
             categories: categories
         };
 
-        postData('http://localhost:8181/recipies', data);
+        postData('http://localhost:8181/recipies', data)
+        .then(setSuccesfullySubmitted(true));
     }
 
-    return(
-        <div>
-            <form>
-                <label htmlFor="recipeName">Name: </label>
-                <input id="recipeName" type="text" value={ recipeName } onChange={ (event) => handleSingleInputChange(event, setRecipeName) } />  <br></br><br></br>
+    const handleSubmitNewRecipe = () => {
+        setSuccesfullySubmitted(false);
+        setRecipeName("");
+        setRecipeType("");
+    }
 
-                <label htmlFor="recipeType">Type: </label>
-                <input id="type" type="text" value={ recipeType } onChange={ (event) => handleSingleInputChange(event, setRecipeType) } />
+    const submitForm = (
+        <form>
+            <label htmlFor="recipeName">Name: </label>
+            <input id="recipeName" type="text" value={ recipeName } onChange={ (event) => handleSingleInputChange(event, setRecipeName) } />  <br></br><br></br>
 
-                <h3>Categories</h3>
-                {categoriesInput.map((cat, index) => (
-                    <input key={index} onChange={ (event) => handleMultipleInputChange(index, event, categories, setCategories) } type="text" />
-                ))}
+            <label htmlFor="recipeType">Type: </label>
+            <input id="type" type="text" value={ recipeType } onChange={ (event) => handleSingleInputChange(event, setRecipeType) } />
 
-                <input type="button" onClick={ () => addNewInput(setCategoriesInput) } value="Add Category" />
-                
-                <h3>Ingredients</h3>
-                {ingredientsInput.map((ing, index) => (
-                    <div key={index}>
-                        <input onChange={ (event) => handleMultipleInputChange(index, event, ingredientName, setIngredientName) } type="text" />
-                        <input onChange={ (event) => handleMultipleInputChange(index, event, ingredientQuantity, setIngredientQuantity) } type="text" />
-                        <input onChange={ (event) => handleMultipleInputChange(index, event, ingredientQuantityType, setIngredientQuantityType) } type="text" />
-                    </div>
-                ))}
+            <h3>Categories</h3>
+            {categoriesInput.map((cat, index) => (
+                <input key={index} onChange={ (event) => handleMultipleInputChange(index, event, categories, setCategories) } type="text" />
+            ))}
 
-                <input type="button" onClick={ () => addNewInput(setIngredientsInput) } value="Add Ingredient" />
-
-                <div>
-                    <input type="button" onClick={ handleSubmit } value="Submit" />
+            <input type="button" onClick={ () => addNewInput(setCategoriesInput) } value="Add Category" />
+            
+            <h3>Ingredients</h3>
+            {ingredientsInput.map((ing, index) => (
+                <div key={index}>
+                    <input onChange={ (event) => handleMultipleInputChange(index, event, ingredientName, setIngredientName) } type="text" />
+                    <input onChange={ (event) => handleMultipleInputChange(index, event, ingredientQuantity, setIngredientQuantity) } type="text" />
+                    <input onChange={ (event) => handleMultipleInputChange(index, event, ingredientQuantityType, setIngredientQuantityType) } type="text" />
                 </div>
-            </form>
-        </div>
+            ))}
+
+            <input type="button" onClick={ () => addNewInput(setIngredientsInput) } value="Add Ingredient" />
+
+            <div>
+                <input type="button" onClick={ handleSubmit } value="Submit" />
+            </div>
+        </form>
     );
+
+    if (!succesfullySubmitted) {
+        return(
+            <div>
+                { submitForm}
+            </div>
+        )
+    } else {
+        return(
+            <div>
+                Submitted
+                <input type="button" value="Add Another Recipe" onClick={ handleSubmitNewRecipe }/>
+            </div>
+        )
+    }
 }
 
 export default SubmitRecipe;
