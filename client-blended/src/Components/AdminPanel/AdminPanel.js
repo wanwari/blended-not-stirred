@@ -11,7 +11,6 @@ const AdminPanel = () => {
             <ul>
                 <li><Link to="/adminpanel/submitrecipe">Add Recipe</Link></li>
                 <li><Link to="/adminpanel/deleterecipe">Delete Recipe</Link></li>
-                <li><Link to="">Change Recipe</Link></li>
             </ul>
             
             <Switch>

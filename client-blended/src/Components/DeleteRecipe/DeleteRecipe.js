@@ -10,14 +10,15 @@ const DeleteRecipe = () => {
         .then(res => res.json())
         .then(data => {
             setAllRecipies(data);
+        })
+        .catch((err) => {
+            console.log(err);
         });
     }
 
     useEffect(() => {
         grabData();
     }, [allRecipies]);
-
-
 
     const handleRecipeClick = (clickedRecipe) => {
 
@@ -29,8 +30,9 @@ const DeleteRecipe = () => {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*'
-        }})
-        
+        }}).catch((err) => {
+            console.log(err);
+        });
     }
 
     return(
