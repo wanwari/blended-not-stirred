@@ -6,16 +6,23 @@ import deleteData from '../Networking/deleteData';
 const DeleteRecipe = () => {
 
     const [allRecipies, setAllRecipies] = useState(null);
+    const [mounted, setMounted] = useState(false);
 
     const grabData = () => {
-        getData('http://localhost:8181/recipies')
-        .then(data => {
-            setAllRecipies(data);
-        });
+        if (mounted)
+            getData('http://localhost:8181/recipies')
+            .then(data => {
+                setAllRecipies(data);
+            });
     }
 
     useEffect(() => {
+        setMounted(true);
         grabData();
+
+        return () => {
+            setMounted(false);
+        }
     }, []);
 
     const handleRecipeClick = (clickedRecipe) => {
