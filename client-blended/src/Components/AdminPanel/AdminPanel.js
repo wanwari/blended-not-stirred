@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, Switch, Route } from 'react-router-dom';
 import SubmitRecipe from '../SubmitRecipe/SubmitRecipe';
 import DeleteRecipe from '../DeleteRecipe/DeleteRecipe';
+import ChangeRecipe from '../ChangeRecipe/ChangeRecipe';
 
 const AdminPanel = () => {
     return(
@@ -11,6 +12,7 @@ const AdminPanel = () => {
             <ul>
                 <li><Link to="/adminpanel/submitrecipe">Add Recipe</Link></li>
                 <li><Link to="/adminpanel/deleterecipe">Delete Recipe</Link></li>
+                <li><Link to="/adminpanel/changerecipe">Change Recipe</Link></li>
             </ul>
             
             <Switch>
@@ -19,6 +21,9 @@ const AdminPanel = () => {
                 </Route>
                 <Route path="/adminpanel/deleterecipe">
                     <DeleteRecipe />
+                </Route>
+                <Route path="/adminpanel/changerecipe">
+                    <ChangeRecipe />
                 </Route>
             </Switch>
         </div>
