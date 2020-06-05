@@ -16,10 +16,10 @@ const DeleteRecipe = () => {
 
     useEffect(() => {
         grabData();
-    }, [allRecipies]);
+    }, []);
 
     const handleRecipeClick = (clickedRecipe) => {
-        deleteData('http://localhost:8181/recipies/' + clickedRecipe._id);
+        deleteData('http://localhost:8181/recipies/', clickedRecipe._id);
     }
 
     return(
