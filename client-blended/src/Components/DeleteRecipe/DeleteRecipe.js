@@ -15,7 +15,7 @@ const DeleteRecipe = () => {
 
     useEffect(() => {
         grabData();
-    }, []);
+    }, [allRecipies]);
 
 
 
