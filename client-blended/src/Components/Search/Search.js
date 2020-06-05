@@ -14,11 +14,9 @@ const Search = () => {
 
     const handleSearchClick = () => {
         setSearchValue(currentSearch);
-
     }
 
     const handleCategoryClicked = (event) => {
-
         const currentCategory = event.target.value;
         const checked = event.target.checked;
         const hasCategories = selectedCategories.includes(event.target.value);
@@ -28,7 +26,6 @@ const Search = () => {
             prevArr.push(event.target.value);
             setSelectedCategories(prevArr);
         } else if (!checked && hasCategories) {
-            //console.log(selectedCategories.indexOf(currentCategory));
             prevArr.splice(selectedCategories.indexOf(currentCategory), 1);
             setSelectedCategories(prevArr);
         }   

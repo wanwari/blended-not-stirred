@@ -37,20 +37,24 @@ app.get('/recipies/:id/:arr', (req, res) => {
     Recipes.find({name: id}, (err, results) => {
         let dataToSend = [];
         if (!err) {
-            results.map((currentResult) => {
-                let valid = false;
-                for (let i = 0; i < categoriesToSearch.length; i++) {
-                    if (currentResult.categories.includes(categoriesToSearch[i]))
-                        valid = true;
-                    else {
-                        valid = false;
-                        break;
+            if (categoriesToSearch.length !== 0) {
+                results.map((currentResult) => {
+                    let valid = false;
+                    for (let i = 0; i < categoriesToSearch.length; i++) {
+                        if (currentResult.categories.includes(categoriesToSearch[i]))
+                            valid = true;
+                        else {
+                            valid = false;
+                            break;
+                        }
                     }
-                }
-                if (valid)
-                    dataToSend.push(currentResult);
-            });
-            res.send(dataToSend);
+                    if (valid)
+                        dataToSend.push(currentResult);
+                });
+                res.send(dataToSend);
+            } else {
+                res.send(results);
+            }
         }
     });
     
