@@ -1,4 +1,4 @@
-async function getData(url) {
+async function getData(url, options) {
     const response = await fetch(url, {
         method: 'GET',
         mode: 'cors',
@@ -8,6 +8,7 @@ async function getData(url) {
             'Access-Control-Allow-Origin': '*',
             'Origin': '127.0.0.1:3000'
         },
+        ...options,
     });
     return response.json();
 }
