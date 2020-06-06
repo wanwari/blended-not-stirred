@@ -3,7 +3,10 @@ async function postData(url, data) {
         method: 'POST',
         mode: 'cors',
         headers: {
-            'Content-Type': 'application/json'
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Origin': '127.0.0.1:3000'
         },
         body: JSON.stringify(data)
     });

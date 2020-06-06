@@ -3,7 +3,10 @@ async function getData(url) {
         method: 'GET',
         mode: 'cors',
         headers: {
-            'Content-Type': 'application/json'
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Origin': '127.0.0.1:3000'
         },
     });
     return response.json();
