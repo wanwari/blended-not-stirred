@@ -1,35 +1,14 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import RecipeList from '../RecipeList/RecipeList';
-import getData from '../Networking/getData';
 import deleteData from '../Networking/deleteData';
 
-const DeleteRecipe = () => {
+const DeleteRecipe = props => {
 
     const [allRecipies, setAllRecipies] = useState(null);
 
-    let abortControllerRef = useRef(null);
-    if (abortControllerRef.current === null) {
-        abortControllerRef.current = new AbortController();
-    }
-
-    const grabData = () => {
-        getData('http://localhost:8181/recipies', {
-            signal: abortControllerRef.current.signal
-        })
-        .then(data => {
-            setAllRecipies(data);
-        }, (e) => {
-            console.error('API call aborted', e);
-        });
-    }
-
     useEffect(() => {
-        grabData();
-
-        return () => {
-            abortControllerRef.current.abort();
-        }
-    }, []); 
+        setAllRecipies(props.allRecipies);
+    }, [props.allRecipies]);
 
     const handleRecipeClick = (clickedRecipe) => {
         let tmpArray = [...allRecipies];
