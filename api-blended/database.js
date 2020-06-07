@@ -4,11 +4,11 @@
 * open and export a connection to the recipe_db mongo database
 */
 
-import mongoose, { connect } from 'mongoose';
+const mongoose = require('mongoose');
 
-connect('mongodb://localhost/recipe_db', 
+mongoose.connect('mongodb://localhost/recipe_db', 
     { useNewUrlParser: true, useUnifiedTopology: true } ,
     () => { console.log('[db.js] Connected to mongodb') }
 );
 
-export default mongoose;
+module.exports = mongoose;

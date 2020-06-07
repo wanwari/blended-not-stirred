@@ -4,16 +4,19 @@
 * entry point for blended-not-stirred api
 */
 
-import express from 'express';
-import cors from 'cors';
-import { json, urlencoded } from 'body-parser';
-import Recipes, { find, deleteOne } from './models/Recipes';
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const Recipes = require('./models/Recipes');
+
+const { json, urlencoded } = bodyParser;
 
 const app = express();
 
 app.use(cors());
 app.use(json());
 app.use(urlencoded({ extended: false }));
+
 
 /*
 * GET /recipies
