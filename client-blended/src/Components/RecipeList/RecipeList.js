@@ -9,7 +9,9 @@ const RecipeList = props => {
     return(
         <div>
             {props.data.map((rec, index) => (
-                <input type="submit" key={ index } onClick={ (event) => recipeClickHandler(rec) } value={ rec._id + " " + rec.name + " " + rec.type} />
+                <div key={ index } >
+                    <input type="submit" onClick={ (event) => recipeClickHandler(rec) } value={ rec._id + " " + rec.name + " " + rec.type} />
+                </div>
             ))}  
         </div>
     );
