@@ -58,7 +58,7 @@ const SubmitRecipe = () => {
     const submitForm = (
         <form>
             <label htmlFor="recipeName">Name: </label>
-            <input id="recipeName" type="text" value={ recipeName } onChange={ (event) => handleSingleInputChange(event, setRecipeName) } />  <br></br><br></br>
+            <input id="recipeName" type="text" value={ recipeName } onChange={ (event) => handleSingleInputChange(event, setRecipeName) } /> 
 
             <label htmlFor="recipeType">Type: </label>
             <input id="type" type="text" value={ recipeType } onChange={ (event) => handleSingleInputChange(event, setRecipeType) } />
