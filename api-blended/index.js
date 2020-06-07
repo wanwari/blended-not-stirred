@@ -25,7 +25,7 @@ app.use(urlencoded({ extended: false }));
 */
 app.get('/recipies', (req, res) => {
     console.log('[index.js] GET request made at /recipies');
-    find({}, (err, results) => {
+    Recipes.find({}, (err, results) => {
         if (!err) {
             res.send(results)
         } else {
@@ -46,7 +46,7 @@ app.get('/recipies/:recipeName/:categories', (req, res) => {
     console.log('[index.js] GET request made at /recipies/' + recipeName);
 
     //find all recipies that match recipeName
-    find({name: recipeName}, (err, recipiesFound) => {
+    Recipes.find({name: recipeName}, (err, recipiesFound) => {
         let dataToSend = [];
         if (!err) {
             //if categories has been passed
@@ -98,7 +98,7 @@ app.post('/recipies', (req, res) => {
 */
 app.delete('/recipies/:id', (req, res) => {
     const id = req.params.id;
-    deleteOne({_id: id}, (err, results) => {
+    Recipes.deleteOne({_id: id}, (err, results) => {
         if (!err) {
             console.log(results);
         } else {
