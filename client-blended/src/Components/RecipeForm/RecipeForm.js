@@ -37,6 +37,7 @@ const RecipeForm = (props) => {
         setId(props.data._id);
         setName(props.data.name);
         setType(props.data.type);
+        setCategories(props.data.categories);
         setIngredientsName(n);
         setIngredientsAmount(a);
         setIngredientsAmountTYpe(aT);
