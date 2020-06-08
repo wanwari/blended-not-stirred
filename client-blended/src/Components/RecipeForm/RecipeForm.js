@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const RecipeForm = (props) => {
 
+    const [id] = useState(props.data._id);
     const [name, setName] = useState(props.data.name);
     const [type, setType] = useState(props.data.type);
     const [categories, setCategories] = useState(props.data.categories);
@@ -40,11 +41,34 @@ const RecipeForm = (props) => {
     }, [props.data, props.deletable]);
 
     const handleDeleteClick = () => {
-        props.onDeleteClick(props.data._id);
+        props.onDeleteClick(id);
+    }
+
+    const handleUpdateClick = () => {
+        const dataToUpdate = {
+            _id: id,
+            name: name,
+            type: type,
+            categories: categories,
+            ingredients: []
+        }
+        ingredientsName.forEach((ing, index) => {
+            console.log(index);
+            dataToUpdate.ingredients.push({
+                name: ingredientsName[index],
+                amount: ingredientsAmount[index],
+                amountType: ingredientsAmountType[index]
+            });
+        });
+        props.onUpdateClick(dataToUpdate);
     }
 
     return(
         <div>
+
+        <label htmlFor="recipeId">Id: </label>
+        <input id="recipeId" type="text" disabled={true} value={ id } />
+
         <label htmlFor="recipeName">Name: </label>
         <input id="recipeName" type="text" value={ name } onChange={ handleNameChange } />
 
@@ -68,6 +92,7 @@ const RecipeForm = (props) => {
         {(props.deletable === "true") && 
             <input type="button" value="Delete" onClick={ handleDeleteClick } />
         }
+        <input type="button" value="Update" onClick={ handleUpdateClick } />
     </div>
     );
 }
