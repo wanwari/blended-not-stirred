@@ -50,6 +50,7 @@ const ManageRecipe = () => {
         });
         setAllRecipies(tmpArray);
         deleteData('http://localhost:8181/recipies/', clickedRecipe);
+        setDisplayForm(false);
     }
 
     const handleUpdateClick = (dataToUpdate) => {
