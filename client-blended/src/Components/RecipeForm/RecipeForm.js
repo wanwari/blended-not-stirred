@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const RecipeForm = (props) => {
 
-    const [id] = useState(props.data._id);
+    const [id, setId] = useState(props.data._id);
     const [name, setName] = useState(props.data.name);
     const [type, setType] = useState(props.data.type);
     const [categories, setCategories] = useState(props.data.categories);
@@ -10,6 +10,7 @@ const RecipeForm = (props) => {
     const [ingredientsAmount, setIngredientsAmount] = useState([]);
     const [ingredientsAmountType, setIngredientsAmountTYpe] = useState([]);
 
+    const handleIdChange = event => setId(event.target.value);
     const handleNameChange = event => setName(event.target.value);
     const handleTypeChange = event => setType(event.target.value);
     const handleCategoriesChange = (index, event) => {
@@ -33,6 +34,7 @@ const RecipeForm = (props) => {
             aT.push(ing.amountType);
         });
 
+        setId(props.data._id);
         setName(props.data.name);
         setType(props.data.type);
         setIngredientsName(n);
@@ -67,7 +69,7 @@ const RecipeForm = (props) => {
         <div>
 
         <label htmlFor="recipeId">Id: </label>
-        <input id="recipeId" type="text" disabled={true} value={ id } />
+        <input id="recipeId" type="text" disabled value={ id } onChange={ handleIdChange } />
 
         <label htmlFor="recipeName">Name: </label>
         <input id="recipeName" type="text" value={ name } onChange={ handleNameChange } />
