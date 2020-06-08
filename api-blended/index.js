@@ -107,6 +107,16 @@ app.delete('/recipies/:id', (req, res) => {
     });
 });
 
+app.put('/recipies/:id', (req, res) => {
+    const id = req.params.id;
+    const newRecipe = req.body;
+    console.log(id);
+    console.log(newRecipe);
+    Recipes.findOneAndReplace({_id: id}, newRecipe, {new: true}, (resFound) => {
+        console.log(resFound);
+    });
+});
+
 const server = app.listen(8181, () => {
     console.log("[index.js] Listening at ", server.address().port);
 });
