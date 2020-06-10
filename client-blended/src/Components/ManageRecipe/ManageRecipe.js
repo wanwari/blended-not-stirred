@@ -73,7 +73,7 @@ const ManageRecipe = () => {
 
             {(displayForm && currentRecipe) &&
                 <Form 
-                    modify="false"
+                    modify="true"
                     data={ currentRecipe } 
                     deletable="true" 
                     onDeleteClick={ (clickedRecipe) => {handleDeleteClick(clickedRecipe)}} 

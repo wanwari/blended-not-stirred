@@ -5,17 +5,12 @@ const Form = props => {
     const [ingredients, setIngredients] = useState([]);
 
     useEffect(() => {
-        if (props.modify === "true")
-            initIngredients(props.data);
-
-        
-    }, [props.data]);
+        initIngredients(props.data.ingredients);
+    }, [props.data.ingredients]);
 
     const initIngredients = (data) => {
-        let tmpArray = [...ingredients];
-
-        data.ingredients.map((ing, index) => {
-            console.log(ing);
+        let tmpArray = [];
+        data.forEach((ing, index) => {
             tmpArray[index] = {
                 ingredientName: ing.name,
                 ingredientQuantity: ing.amount,
@@ -63,6 +58,10 @@ const Form = props => {
             ingredientQuantityType: ""
         }
         setIngredients(prevIng => [...prevIng, newIngredient]);
+    }
+
+    const handleDeleteClick = () => {
+        props.onDeleteClick(props.data._id);
     }
 
     const formStructure = (
@@ -127,6 +126,9 @@ const Form = props => {
                 </div>
             ))}
             <input id="addIngredientsInput" type="button" value="Add Ingredient" onClick={handleAddIngredientsInput} />
+            <div>
+                <input type="submit" value="Delete" onClick={handleDeleteClick} />
+            </div>
         </div>
     );
 
