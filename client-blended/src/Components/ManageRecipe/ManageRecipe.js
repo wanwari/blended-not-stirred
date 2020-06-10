@@ -4,6 +4,7 @@ import getData from '../Networking/getData';
 import RecipeForm from '../RecipeForm/RecipeForm';
 import deleteData from '../Networking/deleteData';
 import putData from '../Networking/putData';
+import Form from '../Form/Form';
 
 const ManageRecipe = () => {
 
@@ -57,6 +58,7 @@ const ManageRecipe = () => {
         console.log('http://localhost:8181/recipies/' + dataToUpdate._id);
         console.log(dataToUpdate);
         putData('http://localhost:8181/recipies/' + dataToUpdate._id, dataToUpdate);
+        setDisplayForm(false);
     }
 
     return(
@@ -70,12 +72,14 @@ const ManageRecipe = () => {
             }
 
             {(displayForm && currentRecipe) &&
-                <RecipeForm 
+                <Form 
+                    modify="false"
                     data={ currentRecipe } 
                     deletable="true" 
                     onDeleteClick={ (clickedRecipe) => {handleDeleteClick(clickedRecipe)}} 
                     onUpdateClick={ (dataToUpdate) => { handleUpdateClick(dataToUpdate) } } />
             }
+
         </div>
     )
 }
