@@ -9,8 +9,9 @@ const db = require('../database');
 const Recipe = db.model('Recipe', {
     name: String,
     type: String,
-    ingredients: [{name: String, amount: String, amountType: String}],
-    categories: [String]
+    ingredients: [{ingredientName: String, ingredientQuantity: String, ingredientQuantityType: Number, ingredientCalories: Number}],
+    categories: [String],
+    totalCalories: Number
 });
 
 module.exports = Recipe;
