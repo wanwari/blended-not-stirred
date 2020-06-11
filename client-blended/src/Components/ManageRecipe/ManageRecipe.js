@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import RecipeList from '../RecipeList/RecipeList';
 import getData from '../Networking/getData';
-import RecipeForm from '../RecipeForm/RecipeForm';
 import deleteData from '../Networking/deleteData';
 import putData from '../Networking/putData';
 import Form from '../Form/Form';
@@ -55,9 +54,9 @@ const ManageRecipe = () => {
     }
 
     const handleUpdateClick = (dataToUpdate) => {
-        console.log('http://localhost:8181/recipies/' + dataToUpdate._id);
+        console.log('http://localhost:8181/recipies/' + dataToUpdate.recipeID);
         console.log(dataToUpdate);
-        putData('http://localhost:8181/recipies/' + dataToUpdate._id, dataToUpdate);
+        putData('http://localhost:8181/recipies/' + dataToUpdate.recipeID, dataToUpdate);
         setDisplayForm(false);
     }
 
@@ -67,7 +66,7 @@ const ManageRecipe = () => {
 
             {(allRecipies !== null) &&
                 <div>
-                    <RecipeList data={ allRecipies } onRecipeClick={ (clickedRecipe) => handleRecipeClick(clickedRecipe) } />
+                    <RecipeList data={ allRecipies } modify="true" onRecipeClick={ (clickedRecipe) => handleRecipeClick(clickedRecipe) } />
                 </div>
             }
 
@@ -77,7 +76,7 @@ const ManageRecipe = () => {
                     data={ currentRecipe } 
                     deletable="true" 
                     onDeleteClick={ (clickedRecipe) => {handleDeleteClick(clickedRecipe)}} 
-                    onUpdateClick={ (dataToUpdate) => { handleUpdateClick(dataToUpdate) } } />
+                    onUpdateClick={ (dataToUpdate) => { handleUpdateClick(dataToUpdate)}} />
             }
 
         </div>

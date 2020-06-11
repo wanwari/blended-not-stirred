@@ -78,7 +78,7 @@ const Search = () => {
             
             <div>
                 <input type="button" value="Search" onClick={ handleSearchClick } />
-                <RecipeSearch result={ searchValue } categories={ selectedCategories } />
+                <RecipeSearch result={ searchValue } recipeCategories={ selectedCategories } />
             </div>
         </div>
     );

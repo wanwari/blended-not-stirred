@@ -29,10 +29,8 @@ const RecipeSearch = (props) => {
     }
 
     useEffect(() => {
-        setSelectedRecipe(null);
-        grabData(props.result, JSON.stringify(props.categories));
-
-    }, [props.result, props.categories]);
+        grabData(props.result, JSON.stringify(props.recipeCategories));
+    }, [props.result, props.recipeCategories]);
 
     const handleBackClicked = () => {
         setSelectedRecipe(null);

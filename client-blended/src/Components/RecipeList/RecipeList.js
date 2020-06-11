@@ -10,7 +10,10 @@ const RecipeList = props => {
         <div>
             {props.data.map((rec, index) => (
                 <div key={ index } >
-                    <input type="submit" onClick={ (event) => recipeClickHandler(rec) } value={ rec._id + " " + rec.name + " " + rec.type} />
+                    <input type="submit" 
+                        onClick={ (event) => recipeClickHandler(rec) } 
+                        value={props.modify === "true" ? (rec._id + " " + rec.recipeName) : (rec.recipeName)} 
+                    />
                 </div>
             ))}  
         </div>

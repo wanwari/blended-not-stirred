@@ -4,7 +4,7 @@ const Ingredient = props => {
 
     const ingredientList = props.ingredients.map((ing, index) => (
         <li key={index}>
-            {ing.amount} {ing.amountType} {ing.name}
+            {ing.ingredientQuantity} {ing.ingredientQuantityType} {ing.ingredientName}
         </li>
     ));
 
