@@ -7,11 +7,14 @@
 const db = require('../database');
 
 const Recipe = db.model('Recipe', {
-    name: String,
-    type: String,
-    ingredients: [{ingredientName: String, ingredientQuantity: String, ingredientQuantityType: Number, ingredientCalories: Number}],
-    categories: [String],
-    totalCalories: Number
+    recipeName: String,
+    recipeType: String,
+    recipeIngredients: [{ingredientName: String, ingredientQuantity: Number, ingredientQuantityType: String}],
+    recipeCategories: [String],
+    recipeCalories: Number,
+    recipeProtein: Number,
+    recipeFat: Number,
+    recipeCarbs: Number
 });
 
 module.exports = Recipe;

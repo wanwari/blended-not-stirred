@@ -39,14 +39,13 @@ app.get('/recipies', (req, res) => {
 * handles GET request to /recipies/:recipeName/:categories
 * returns a list of all items that match :recipeName and optional :categories
 */
-app.get('/recipies/:recipeName/:categories', (req, res) => {
-    const recipeName = req.params.recipeName;
-    const categoriesToSearch = JSON.parse(req.params.categories);
+app.get('/recipies/:recipeName/:recipeCategories', (req, res) => {
+    const name = req.params.recipeName;
+    const categoriesToSearch = JSON.parse(req.params.recipeCategories);
     
-    console.log('[index.js] GET request made at /recipies/' + recipeName);
+    console.log('[index.js] GET request made at /recipies/' + name + '/' + categoriesToSearch);
 
-    //find all recipies that match recipeName
-    Recipes.find({name: recipeName}, (err, recipiesFound) => {
+    Recipes.find({recipeName: name}, (err, recipiesFound) => {
         let dataToSend = [];
         if (!err) {
             //if categories has been passed
@@ -57,7 +56,7 @@ app.get('/recipies/:recipeName/:categories', (req, res) => {
                     //loop through each categories provided
                     for (let i = 0; i < categoriesToSearch.length; i++) {
                         //if the recipie contains the current categorie check the next one
-                        if (currentResult.categories.includes(categoriesToSearch[i])) {
+                        if (currentResult.recipeCategories.includes(categoriesToSearch[i])) {
                             valid = true;
                         //else mark the current Recipe as invalid and break
                         } else {
@@ -78,7 +77,7 @@ app.get('/recipies/:recipeName/:categories', (req, res) => {
             console.error(err);
         }
     });
-    
+  
 });
 
 /*
@@ -88,7 +87,7 @@ app.get('/recipies/:recipeName/:categories', (req, res) => {
 * TODO: validate body before saving to db 
 */
 app.post('/recipies', (req, res) => {
-    new Recipes(req.body).save(() => console.log("Saved"));
+    new Recipes(req.body).save(() => console.log("saved"));
 });
 
 /*
