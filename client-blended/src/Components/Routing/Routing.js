@@ -1,16 +1,20 @@
-import React from 'react';
+import React from "react";
 
-import { Link, Switch, Route } from 'react-router-dom';
-import Search from '../Search/Search';
-import AdminPanel from '../AdminPanel/AdminPanel';
+import { Link, Switch, Route } from "react-router-dom";
+import Search from "../Search/Search";
+import AdminPanel from "../AdminPanel/AdminPanel";
 
 const Routing = () => {
-    return(
+    return (
         <div>
             <ul>
-                <li><Link to="/search">search</Link></li>
-                <li><Link to="/adminpanel">Admin Panel</Link></li>
-           </ul>
+                <li>
+                    <Link to="/search">search</Link>
+                </li>
+                <li>
+                    <Link to="/adminpanel">Admin Panel</Link>
+                </li>
+            </ul>
 
             <Switch>
                 <Route path="/search">
@@ -21,7 +25,7 @@ const Routing = () => {
                 </Route>
             </Switch>
         </div>
-    )
-}
+    );
+};
 
 export default Routing;
