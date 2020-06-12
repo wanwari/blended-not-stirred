@@ -9,9 +9,8 @@ const Recipe = (props) => {
             <h2>{props.data.recipeType}</h2>
             <Ingredient ingredients={props.data.recipeIngredients} />
             <h3>
-                Calories {props.data.recipeCalories} | Protein{" "}
-                {props.data.recipeProtein} | Fat {props.data.recipeFat} | Carbs{" "}
-                {props.data.recipeCarbs}{" "}
+                Calories {props.data.recipeCalories} | Protein {props.data.recipeProtein} | Fat {props.data.recipeFat} |
+                Carbs {props.data.recipeCarbs}{" "}
             </h3>
         </div>
     );

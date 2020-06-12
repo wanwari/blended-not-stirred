@@ -54,12 +54,7 @@ const ManageRecipe = () => {
     };
 
     const handleUpdateClick = (dataToUpdate) => {
-        console.log("http://localhost:8181/recipies/" + dataToUpdate.recipeID);
-        console.log(dataToUpdate);
-        putData(
-            "http://localhost:8181/recipies/" + dataToUpdate.recipeID,
-            dataToUpdate
-        );
+        putData("http://localhost:8181/recipies/" + dataToUpdate.recipeID, dataToUpdate);
         setDisplayForm(false);
     };
 
@@ -72,9 +67,7 @@ const ManageRecipe = () => {
                     <RecipeList
                         data={allRecipies}
                         modify="true"
-                        onRecipeClick={(clickedRecipe) =>
-                            handleRecipeClick(clickedRecipe)
-                        }
+                        onRecipeClick={(clickedRecipe) => handleRecipeClick(clickedRecipe)}
                     />
                 </div>
             )}

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import RecipeList from "../RecipeList/RecipeList";
 import Recipe from "../Recipe/Recipe";
-
 import getData from "../Networking/getData";
 
 const RecipeSearch = (props) => {
@@ -41,16 +40,11 @@ const RecipeSearch = (props) => {
             {!errors &&
                 recipes &&
                 (selectedRecipe === null ? (
-                    <RecipeList
-                        data={recipes}
-                        onRecipeClick={(r) => setSelectedRecipe(r)}
-                    />
+                    <RecipeList data={recipes} onRecipeClick={(r) => setSelectedRecipe(r)} />
                 ) : (
                     <Recipe data={selectedRecipe} />
                 ))}
-            {selectedRecipe !== null && (
-                <input type="button" value="Back" onClick={handleBackClicked} />
-            )}
+            {selectedRecipe !== null && <input type="button" value="Back" onClick={handleBackClicked} />}
         </div>
     );
 };

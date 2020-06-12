@@ -1,5 +1,4 @@
 import React from "react";
-
 import { Link, Switch, Route } from "react-router-dom";
 import Search from "../Search/Search";
 import AdminPanel from "../AdminPanel/AdminPanel";

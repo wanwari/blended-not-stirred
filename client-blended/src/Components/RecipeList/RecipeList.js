@@ -11,12 +11,8 @@ const RecipeList = (props) => {
                 <div key={index}>
                     <input
                         type="submit"
-                        onClick={(event) => recipeClickHandler(rec)}
-                        value={
-                            props.modify === "true"
-                                ? rec._id + " " + rec.recipeName
-                                : rec.recipeName
-                        }
+                        onClick={() => recipeClickHandler(rec)}
+                        value={props.modify === "true" ? rec._id + " " + rec.recipeName : rec.recipeName}
                     />
                 </div>
             ))}

@@ -6,7 +6,6 @@ const Form = (props) => {
     const [recipeType, setRecipeType] = useState("smoothie");
     const [recipeCategories, setRecipeCategories] = useState([]);
     const [recipeIngredients, setRecipeIngredients] = useState([]);
-
     const [recipeCalories, setRecipeCalories] = useState("");
     const [recipeProtein, setRecipeProtein] = useState("");
     const [recipeFat, setRecipeFat] = useState("");
@@ -39,18 +38,14 @@ const Form = (props) => {
 
     const handleRecipeNameChange = (event) => setRecipeName(event.target.value);
     const handleRecipeTypeChange = (event) => setRecipeType(event.target.value);
-    const handleRecipeCategoriesChange = (event) =>
-        setRecipeCategories(
-            Array.from(event.target.selectedOptions, (option) => option.value)
-        );
 
-    const handleRecipeProteinChange = (event) =>
-        setRecipeProtein(event.target.value);
-    const handleRecipeCaloriesChange = (event) =>
-        setRecipeCalories(event.target.value);
+    const handleRecipeCategoriesChange = (event) =>
+        setRecipeCategories(Array.from(event.target.selectedOptions, (option) => option.value));
+
+    const handleRecipeProteinChange = (event) => setRecipeProtein(event.target.value);
+    const handleRecipeCaloriesChange = (event) => setRecipeCalories(event.target.value);
     const handleRecipeFatChange = (event) => setRecipeFat(event.target.value);
-    const handleRecipeCarbsChange = (event) =>
-        setRecipeCarbs(event.target.value);
+    const handleRecipeCarbsChange = (event) => setRecipeCarbs(event.target.value);
 
     const handleIngredientsChange = (index, event, property) => {
         let tmpArray = [...recipeIngredients];
@@ -92,9 +87,8 @@ const Form = (props) => {
         props.onDeleteClick(props.data._id);
     };
 
-    const handleUpdateClick = () => {
-        const dataToUpdate = {
-            recipeID: recipeID,
+    const handleModifyClick = (type) => {
+        const data = {
             recipeName: recipeName,
             recipeType: recipeType,
             recipeCategories: recipeCategories,
@@ -104,22 +98,20 @@ const Form = (props) => {
             recipeFat: recipeFat,
             recipeCarbs: recipeCarbs,
         };
-        console.log(dataToUpdate);
-        props.onUpdateClick(dataToUpdate);
-    };
 
-    const handleSubmitClick = () => {
-        const dataToSubmit = {
-            recipeName: recipeName,
-            recipeType: recipeType,
-            recipeCategories: recipeCategories,
-            recipeIngredients: recipeIngredients,
-            recipeCalories: recipeCalories,
-            recipeProtein: recipeProtein,
-            recipeFat: recipeFat,
-            recipeCarbs: recipeCarbs,
-        };
-        props.handleSubmitClick(dataToSubmit);
+        switch (type) {
+            case "UPDATE":
+                console.log(data);
+                data.recipeID = recipeID;
+                props.onUpdateClick(data);
+                break;
+            case "SUBMIT":
+                console.log(data);
+                props.handleSubmitClick(data);
+                break;
+            default:
+                console.log("err");
+        }
     };
 
     const formStructure = (
@@ -128,12 +120,7 @@ const Form = (props) => {
             <input id="recipeID" type="text" disabled value={recipeID} />
 
             <h2>Recipe Name</h2>
-            <input
-                id="recipeName"
-                type="text"
-                value={recipeName}
-                onChange={(event) => handleRecipeNameChange(event)}
-            />
+            <input id="recipeName" type="text" value={recipeName} onChange={(event) => handleRecipeNameChange(event)} />
 
             <h2>Recipe Type</h2>
             <select value={recipeType} onChange={handleRecipeTypeChange}>
@@ -141,13 +128,9 @@ const Form = (props) => {
                 <option value="shake">Shake</option>
             </select>
 
-            <h2>Caregories</h2>
+            <h2>Categories</h2>
             <div>
-                <select
-                    multiple
-                    value={recipeCategories}
-                    onChange={handleRecipeCategoriesChange}
-                >
+                <select multiple value={recipeCategories} onChange={handleRecipeCategoriesChange}>
                     <option value="high_protein">high_protein</option>
                     <option value="low_fat">low_fat</option>
                     <option value="nut_free">nut_free</option>
@@ -165,54 +148,29 @@ const Form = (props) => {
                         type="text"
                         placeholder="Name"
                         value={currentIngredient.ingredientName}
-                        onChange={(event) =>
-                            handleIngredientsChange(
-                                index,
-                                event,
-                                "ingredientName"
-                            )
-                        }
+                        onChange={(event) => handleIngredientsChange(index, event, "ingredientName")}
                     />
                     <input
                         type="number"
                         placeholder="Quantity"
                         value={currentIngredient.ingredientQuantity}
-                        onChange={(event) =>
-                            handleIngredientsChange(
-                                index,
-                                event,
-                                "ingredientQuantity"
-                            )
-                        }
+                        onChange={(event) => handleIngredientsChange(index, event, "ingredientQuantity")}
                     />
                     <input
                         type="text"
                         placeholder="Quantity Type"
                         value={currentIngredient.ingredientQuantityType}
-                        onChange={(event) =>
-                            handleIngredientsChange(
-                                index,
-                                event,
-                                "ingredientQuantityType"
-                            )
-                        }
+                        onChange={(event) => handleIngredientsChange(index, event, "ingredientQuantityType")}
                     />
                     <input
                         id="deleteCurrentIngredient"
                         type="button"
                         value="Delete"
-                        onClick={(currentIngredient) =>
-                            handleDeleteCurrentIngredientClick(index)
-                        }
+                        onClick={(currentIngredient) => handleDeleteCurrentIngredientClick(index)}
                     />
                 </div>
             ))}
-            <input
-                id="addIngredientsInput"
-                type="button"
-                value="Add Ingredient"
-                onClick={handleAddIngredientsInput}
-            />
+            <input id="addIngredientsInput" type="button" value="Add Ingredient" onClick={handleAddIngredientsInput} />
 
             <div>
                 <h2>Macros</h2>
@@ -222,49 +180,22 @@ const Form = (props) => {
                     value={recipeCalories}
                     onChange={handleRecipeCaloriesChange}
                 />
-                <input
-                    type="number"
-                    placeholder="protein"
-                    value={recipeProtein}
-                    onChange={handleRecipeProteinChange}
-                />
-                <input
-                    type="number"
-                    placeholder="fat"
-                    value={recipeFat}
-                    onChange={handleRecipeFatChange}
-                />
-                <input
-                    type="number"
-                    placeholder="carbs"
-                    value={recipeCarbs}
-                    onChange={handleRecipeCarbsChange}
-                />
+                <input type="number" placeholder="protein" value={recipeProtein} onChange={handleRecipeProteinChange} />
+                <input type="number" placeholder="fat" value={recipeFat} onChange={handleRecipeFatChange} />
+                <input type="number" placeholder="carbs" value={recipeCarbs} onChange={handleRecipeCarbsChange} />
             </div>
 
             <div>
                 {props.modify === "true" && (
                     <div>
-                        <input
-                            type="submit"
-                            value="Update"
-                            onClick={handleUpdateClick}
-                        />
-                        <input
-                            type="submit"
-                            value="Delete"
-                            onClick={handleDeleteClick}
-                        />
+                        <input type="submit" value="Update" onClick={() => handleModifyClick("UPDATE")} />
+                        <input type="submit" value="Delete" onClick={handleDeleteClick} />
                     </div>
                 )}
             </div>
             <div>
                 {props.submit === "true" && (
-                    <input
-                        type="submit"
-                        value="Submit"
-                        onClick={handleSubmitClick}
-                    />
+                    <input type="submit" value="Submit" onClick={() => handleModifyClick("SUBMIT")} />
                 )}
             </div>
         </div>

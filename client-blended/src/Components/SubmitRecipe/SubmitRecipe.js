@@ -1,6 +1,6 @@
 import React from "react";
-import postData from "../Networking/postData";
 import Form from "../Form/Form";
+import postData from "../Networking/postData";
 
 const SubmitRecipe = () => {
     const handleSubmit = (dataToPost) => {
@@ -11,11 +11,7 @@ const SubmitRecipe = () => {
 
     return (
         <div>
-            <Form
-                data={null}
-                submit="true"
-                handleSubmitClick={(data) => handleSubmit(data)}
-            />
+            <Form data={null} submit="true" handleSubmitClick={(data) => handleSubmit(data)} />
         </div>
     );
 };
