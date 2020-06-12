@@ -42,12 +42,7 @@ app.get("/recipies/:recipeName/:recipeCategories", (req, res) => {
     const name = req.params.recipeName;
     const categoriesToSearch = JSON.parse(req.params.recipeCategories);
 
-    console.log(
-        "[index.js] GET request made at /recipies/" +
-            name +
-            "/" +
-            categoriesToSearch
-    );
+    console.log("[index.js] GET request made at /recipies/" + name + "/" + categoriesToSearch);
 
     Recipes.find({ recipeName: name }, (err, recipiesFound) => {
         let dataToSend = [];
@@ -60,11 +55,7 @@ app.get("/recipies/:recipeName/:recipeCategories", (req, res) => {
                     //loop through each categories provided
                     for (let i = 0; i < categoriesToSearch.length; i++) {
                         //if the recipie contains the current categorie check the next one
-                        if (
-                            currentResult.recipeCategories.includes(
-                                categoriesToSearch[i]
-                            )
-                        ) {
+                        if (currentResult.recipeCategories.includes(categoriesToSearch[i])) {
                             valid = true;
                             //else mark the current Recipe as invalid and break
                         } else {
@@ -117,14 +108,9 @@ app.put("/recipies/:id", (req, res) => {
     const newRecipe = req.body;
     console.log(id);
     console.log(newRecipe);
-    Recipes.findOneAndReplace(
-        { _id: id },
-        newRecipe,
-        { new: true },
-        (resFound) => {
-            console.log(resFound);
-        }
-    );
+    Recipes.findOneAndReplace({ _id: id }, newRecipe, { new: true }, (resFound) => {
+        console.log(resFound);
+    });
 });
 
 const server = app.listen(8181, () => {

@@ -6,12 +6,8 @@
 
 const mongoose = require("mongoose");
 
-mongoose.connect(
-    "mongodb://localhost/recipe_db",
-    { useNewUrlParser: true, useUnifiedTopology: true },
-    () => {
-        console.log("[db.js] Connected to mongodb");
-    }
-);
+mongoose.connect("mongodb://localhost/recipe_db", { useNewUrlParser: true, useUnifiedTopology: true }, () => {
+    console.log("[db.js] Connected to mongodb");
+});
 
 module.exports = mongoose;
