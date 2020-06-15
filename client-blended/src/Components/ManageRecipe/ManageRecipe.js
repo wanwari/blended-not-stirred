@@ -3,7 +3,7 @@ import RecipeList from "../RecipeList/RecipeList";
 import getData from "../Networking/getData";
 import deleteData from "../Networking/deleteData";
 import putData from "../Networking/putData";
-import Form from "../Form/Form";
+import RenderForm from "../Form/RenderForm";
 
 const ManageRecipe = () => {
     const [allRecipies, setAllRecipies] = useState(null);
@@ -73,7 +73,7 @@ const ManageRecipe = () => {
             )}
 
             {displayForm && currentRecipe && (
-                <Form
+                <RenderForm
                     modify="true"
                     data={currentRecipe}
                     deletable="true"

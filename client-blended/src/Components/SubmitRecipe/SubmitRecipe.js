@@ -1,11 +1,9 @@
 import React from "react";
-import Form from "../Form/Form";
+import Form from "../Form/RenderForm";
 import postData from "../Networking/postData";
 
 const SubmitRecipe = () => {
     const handleSubmit = (dataToPost) => {
-        console.log("to post");
-        console.log(dataToPost);
         postData("http://localhost:8181/recipies", dataToPost);
     };
 
