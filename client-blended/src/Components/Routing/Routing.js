@@ -8,7 +8,7 @@ const Routing = () => {
         <div>
             <ul>
                 <li>
-                    <Link to="/search">search</Link>
+                    <Link to="/">search</Link>
                 </li>
                 <li>
                     <Link to="/adminpanel">Admin Panel</Link>
@@ -16,11 +16,11 @@ const Routing = () => {
             </ul>
 
             <Switch>
-                <Route path="/search">
-                    <RenderSearch />
-                </Route>
                 <Route path="/adminpanel">
                     <AdminPanel />
+                </Route>
+                <Route path="/">
+                    <RenderSearch />
                 </Route>
             </Switch>
         </div>
