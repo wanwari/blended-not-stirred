@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, Switch, Route } from "react-router-dom";
-import Search from "../Search/Search";
+import RenderSearch from "../Search/RenderSearch";
 import AdminPanel from "../AdminPanel/AdminPanel";
 
 const Routing = () => {
@@ -17,7 +17,7 @@ const Routing = () => {
 
             <Switch>
                 <Route path="/search">
-                    <Search />
+                    <RenderSearch />
                 </Route>
                 <Route path="/adminpanel">
                     <AdminPanel />
