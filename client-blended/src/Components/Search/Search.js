@@ -1,55 +1,78 @@
 import React from "react";
 import RecipeSearch from "../RecipeSearch/RecipeSearch";
+import { SearchContainer, Title, SearchBox, SearchBoxInput, SearchBoxButton, Categories } from "./SearchStyles";
+import CategoryButtons from "./CategoryButtons";
 
 const Search = (props) => {
     return (
-        <div>
-            <h1>Search.js</h1>
+        <SearchContainer>
+            <Title>Blended not Stirred</Title>
 
-            <input
-                type="text"
-                value={props.currentSearch}
-                onChange={props.handleSearchChange}
-                onKeyDown={props.handleKeyDown}
-            />
+            <SearchBox>
+                <SearchBoxInput
+                    type="text"
+                    value={props.currentSearch}
+                    onChange={props.handleSearchChange}
+                    onKeyDown={props.handleKeyDown}
+                    placeholder="Mango Shake"
+                />
+                <SearchBoxButton type="submit" value="Search" onClick={props.handleSearchClick} />
+            </SearchBox>
+
+            <Categories>
+                <CategoryButtons
+                    type="submit"
+                    handleBtnClick={(event) => props.handleCategoryClicked(event)}
+                    id="high_protein"
+                    value="High Protein"
+                    selectedCategories={props.selectedCategories}
+                />
+
+                <CategoryButtons
+                    type="submit"
+                    handleBtnClick={(event) => props.handleCategoryClicked(event)}
+                    id="low_fat"
+                    value="Low Fat"
+                    selectedCategories={props.selectedCategories}
+                />
+
+                <CategoryButtons
+                    type="submit"
+                    handleBtnClick={(event) => props.handleCategoryClicked(event)}
+                    id="lactose_free"
+                    value="Lactose Free"
+                    selectedCategories={props.selectedCategories}
+                />
+
+                <CategoryButtons
+                    type="submit"
+                    handleBtnClick={(event) => props.handleCategoryClicked(event)}
+                    id="vegan"
+                    value="Vegan"
+                    selectedCategories={props.selectedCategories}
+                />
+
+                <CategoryButtons
+                    type="submit"
+                    handleBtnClick={(event) => props.handleCategoryClicked(event)}
+                    id="nut_free"
+                    value="Nut Free"
+                    selectedCategories={props.selectedCategories}
+                />
+
+                <CategoryButtons
+                    type="submit"
+                    handleBtnClick={(event) => props.handleCategoryClicked(event)}
+                    id="low_sugar"
+                    value="Low Sugar"
+                    selectedCategories={props.selectedCategories}
+                />
+            </Categories>
 
             <div>
-                <label onClick={(event) => event.handleCategoryClicked(event)}>
-                    <input type="checkbox" id="high_protein" name="high_protein" value="high_protein" />
-                    High Protein
-                </label>
-
-                <label onClick={(event) => event.handleCategoryClicked(event)}>
-                    <input type="checkbox" id="low_fat" name="low_fat" value="low_fat" />
-                    Low Fat
-                </label>
-
-                <label onClick={(event) => event.handleCategoryClicked(event)}>
-                    <input type="checkbox" id="lactose_free" name="lactose_free" value="lactose_free" />
-                    Lactose Free
-                </label>
-
-                <label onClick={(event) => event.handleCategoryClicked(event)}>
-                    <input type="checkbox" id="vegan" name="vegan" value="vegan" />
-                    Vegan
-                </label>
-
-                <label onClick={(event) => event.handleCategoryClicked(event)}>
-                    <input type="checkbox" id="nut_free" name="nut_free" value="nut_free" />
-                    Nut Free
-                </label>
-
-                <label onClick={(event) => event.handleCategoryClicked(event)}>
-                    <input type="checkbox" id="low_sugar" name="low_sugar" value="low_sugar" />
-                    Low Sugar
-                </label>
-            </div>
-
-            <div>
-                <input type="button" value="Search" onClick={props.handleSearchClick} />
                 <RecipeSearch result={props.searchValue} recipeCategories={props.selectedCategories} />
             </div>
-        </div>
+        </SearchContainer>
     );
 };
 
