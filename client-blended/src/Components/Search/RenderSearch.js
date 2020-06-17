@@ -8,7 +8,6 @@ const RenderSearch = () => {
 
     const handleSearchChange = (event) => {
         setCurrentSearch(event.target.value);
-        console.log("changed");
     };
 
     const handleSearchClick = () => {
@@ -17,14 +16,14 @@ const RenderSearch = () => {
 
     const handleCategoryClicked = (event) => {
         const currentCategory = event.target.value;
-        const checked = event.target.checked;
         const hasCategories = selectedCategories.includes(event.target.value);
         let prevArr = [...selectedCategories];
 
-        if (checked && !hasCategories) prevArr.push(event.target.value);
-        else if (!checked && hasCategories) prevArr.splice(selectedCategories.indexOf(currentCategory), 1);
+        if (!hasCategories) prevArr.push(event.target.value);
+        else if (hasCategories) prevArr.splice(selectedCategories.indexOf(currentCategory), 1);
 
         setSelectedCategories(prevArr);
+        console.log(prevArr);
     };
 
     const handleKeyDown = (event) => {
