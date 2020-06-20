@@ -1,34 +1,34 @@
-import React from "react";
-import { Link, Switch, Route } from "react-router-dom";
+import React, { useEffect } from "react";
 import RenderSearch from "../Search/RenderSearch";
 import AdminPanel from "../AdminPanel/AdminPanel";
 import { Navigation, NavLink, NavA } from "./RoutingStyles";
+import { useRoutes, A } from "hookrouter";
 
 const Routing = () => {
+    const routes = {
+        "/": () => <RenderSearch />,
+        "/adminpanel": () => <AdminPanel />,
+    };
+
+    const routeResult = useRoutes(routes);
+
     return (
         <div>
             <Navigation>
                 <ul>
                     <NavLink>
                         <NavA>
-                            <Link to="/">Search</Link>
+                            <A href="/">Search</A>
                         </NavA>
                     </NavLink>
                     <NavLink>
                         <NavA>
-                            <Link to="/adminpanel">Admin Panel</Link>
+                            <A href="/adminpanel">Admin Panel</A>
                         </NavA>
                     </NavLink>
                 </ul>
             </Navigation>
-            <Switch>
-                <Route path="/adminpanel">
-                    <AdminPanel />
-                </Route>
-                <Route path="/">
-                    <RenderSearch />
-                </Route>
-            </Switch>
+            {routeResult}
         </div>
     );
 };
